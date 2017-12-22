@@ -527,10 +527,10 @@ public class cordovaNetworkManager extends CordovaPlugin {
         }
 
         String ssid = info.getSSID();
-        if(ssid.isEmpty()) {
+        if(ssid != null && ssid.isEmpty()) {
             ssid = info.getBSSID();
         }
-        if(ssid.isEmpty()){
+        if(ssid == null || ssid.isEmpty()){
             callbackContext.error("SSID is empty");
             return false;
         }

@@ -59,13 +59,37 @@ public class cordovaNetworkManager extends CordovaPlugin {
 
     private WifiManager wifiManager;
     private CallbackContext callbackContext;
+    private static final int PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION = 0;
+    public static final String LOCATION = Manifest.permission.ACCESS_COARSE_LOCATION;
 
     @Override
     public void initialize(CordovaInterface cordova, CordovaWebView webView) {
         super.initialize(cordova, webView);
-        this.wifiManager = (WifiManager) cordova.getActivity().getSystemService(Context.WIFI_SERVICE);
+        if(cordova.hasPermission(LOCATION))
+            this.wifiManager = (WifiManager) cordova.getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+        else{
+            cordova.requestPermission(this, PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION, LOCATION);
+        }
     }
-
+    @Override
+    public void onRequestPermissionResult(int requestCode, String[] permissions,
+                                          int[] grantResults) throws JSONException
+    {
+        for(int r:grantResults)
+        {
+            if(r == PackageManager.PERMISSION_DENIED)
+            {
+                this.callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR, "Permission Denied"));
+                return;
+            }
+        }
+        switch(requestCode)
+        {
+            case PERMISSIONS_REQUEST_CODE_ACCESS_COARSE_LOCATION:
+                this.wifiManager = (WifiManager) cordova.getActivity().getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                break;
+        }
+    }
     @Override
     public boolean execute(String action, JSONArray data, CallbackContext callbackContext)
                             throws JSONException {

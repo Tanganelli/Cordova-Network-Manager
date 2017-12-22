@@ -1,6 +1,6 @@
 {
   "name": "cordovanetworkmanager",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "cordova": {
     "id": "cordovanetworkmanager",
     "platforms": [
@@ -10,13 +10,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/arsenal942/Cordova-Network-Manager.git"
+    "url": "git+https://github.com/Tanganelli/Cordova-Network-Manager.git"
   },
-  "author": "Nicholas Clancy",
+  "author": "Giacomo Tanganelli",
   "license": "MIT",
   "description": "Cordova Network Manager for Android and iOS",
   "bugs": {
-    "url": "https://github.com/arsenal942/Cordova-Network-Manager/issues"
+    "url": "https://github.com/Tanganelli/Cordova-Network-Manager/issues"
   },
-  "homepage": "https://github.com/arsenal942/Cordova-Network-Manager#readme"
+  "homepage": "https://github.com/Tanganelli/Cordova-Network-Manager#readme"
 }

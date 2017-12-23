@@ -304,7 +304,16 @@ public class cordovaNetworkManager extends CordovaPlugin {
         int networkIdToConnect = ssidToNetworkId(ssidToConnect);
 		int currentNetworkId = ssidToNetworkId(currentSSID);
 
-        if (networkIdToConnect >= 0 && currentNetworkId >= 0) {
+		if (networkIdToConnect >= 0 && currentSSID == ""){
+            wifiManager.enableNetwork(networkIdToConnect, true);
+
+            SupplicantState supState;
+            WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            supState = wifiInfo.getSupplicantState();
+
+            callbackContext.success(supState.toString());
+            return true;
+        } else if (networkIdToConnect >= 0 && currentNetworkId >= 0) {
             // We disable the network before connecting, because if this was the last connection before
             // a disconnect(), this will not reconnect.
 

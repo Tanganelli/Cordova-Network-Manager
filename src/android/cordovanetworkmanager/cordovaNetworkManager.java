@@ -304,7 +304,7 @@ public class cordovaNetworkManager extends CordovaPlugin {
         int networkIdToConnect = ssidToNetworkId(ssidToConnect);
 		int currentNetworkId = ssidToNetworkId(currentSSID);
 
-		if (networkIdToConnect >= 0 && currentSSID.equal("")){
+		if (networkIdToConnect >= 0 && currentSSID.equals("")){
             wifiManager.enableNetwork(networkIdToConnect, true);
 
             SupplicantState supState;
